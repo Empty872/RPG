@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17748e9cd3cacb54aa433a5836e1a99f, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1213324986731291946, guid: 0383ee49dff103247a9fecd9e9153103, type: 3}
+  weaponPrefab: {fileID: 1213324986731291946, guid: 0383ee49dff103247a9fecd9e9153103, type: 3}
+  weaponUIPrefab: {fileID: 4205435497288010212, guid: 22fdfbf0f87ef3f47aa591372fb7a295, type: 3}
   weaponType: 1
   damage: 2
   distance: 1.3
   attackCooldown: 1
   timeToHit: 0.3
+  name: Sword

@@ -1,49 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu]
 public class WeaponSO : ScriptableObject
 {
     // Start is called before the first frame update
-    public Transform prefab;
-    public enum WeaponType
+    [SerializeField] private Transform weaponPrefab;
+    [SerializeField] private Transform weaponUIPrefab;
+    [SerializeField] private WeaponType weaponType;
+    [SerializeField] private float damage;
+    [SerializeField] private float distance;
+    [SerializeField] private float attackCooldown;
+    [SerializeField] private float timeToHit;
+    [SerializeField] private string name;
+
+    public Transform WeaponPrefab => weaponPrefab;
+    public Transform WeaponUIPrefab => weaponUIPrefab;
+    public float Damage => damage;
+    public float Distance => distance;
+    public float AttackCooldown => attackCooldown;
+    public float TimeToHit => timeToHit;
+
+    public WeaponType WeaponType => weaponType;
+    public string Name => name;
+
+    // public WeaponArmType WeaponArmType => GetArmType();
+    public WeaponArmType WeaponArmType
     {
-        Fist,
-        Sword,
-        BigSword,
-        Shield
+        get
+        {
+            switch (weaponType)
+            {
+                case WeaponType.Fist:
+                    return WeaponArmType.RightHanded;
+                case WeaponType.Sword:
+                    return WeaponArmType.RightHanded;
+                case WeaponType.Shield:
+                    return WeaponArmType.LeftHanded;
+                case WeaponType.BigSword:
+                    return WeaponArmType.BothHanded;
+            }
+
+            return WeaponArmType.RightHanded;
+        }
     }
-
-    public WeaponType weaponType;
-    public float damage;
-    public float distance;
-    public float attackCooldown;
-    public float timeToHit;
-
-    // public Weapon(WeaponType weaponType)
-    // {
-    //     this.weaponType = weaponType;
-    //     switch (this.weaponType)
-    //     {
-    //         case WeaponType.Fist:
-    //             damage = 1;
-    //             distance = 1.1f;
-    //             attackCooldown = 1;
-    //             timeToHit = 0.5f;
-    //             break;
-    //         case WeaponType.Sword:
-    //             damage = 2;
-    //             distance = 1.3f;
-    //             attackCooldown = 1;
-    //             timeToHit = 0.3f;
-    //             break;
-    //         case WeaponType.BigSword:
-    //             damage = 4;
-    //             distance = 2;
-    //             attackCooldown = 2;
-    //             timeToHit = 0.8f;
-    //             break;
-    //     }
-    // }
 }

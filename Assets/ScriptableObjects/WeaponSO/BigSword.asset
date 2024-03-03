@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17748e9cd3cacb54aa433a5836e1a99f, type: 3}
   m_Name: BigSword
   m_EditorClassIdentifier: 
-  prefab: {fileID: 4105904736913512327, guid: 66b64e243493df146a830e0fa0d3a585, type: 3}
+  weaponPrefab: {fileID: 4105904736913512327, guid: 66b64e243493df146a830e0fa0d3a585, type: 3}
+  weaponUIPrefab: {fileID: 5841923921488145563, guid: 774d51a9c50d7aa41a111939088886af, type: 3}
   weaponType: 2
   damage: 4
   distance: 2
   attackCooldown: 2
   timeToHit: 0.8
+  name: Big Sword

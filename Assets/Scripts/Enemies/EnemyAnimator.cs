@@ -63,15 +63,15 @@ public class EnemyAnimator : MonoBehaviour
 
     private void AnimateAttack()
     {
-        switch (enemyBattle.GetWeaponSO().weaponType)
+        switch (enemyBattle.GetWeaponSO().WeaponType)
         {
-            case WeaponSO.WeaponType.Fist:
+            case WeaponType.Fist:
                 AnimatePunch();
                 break;
-            case WeaponSO.WeaponType.Sword:
+            case WeaponType.Sword:
                 AnimateOneHandSlash();
                 break;
-            case WeaponSO.WeaponType.BigSword:
+            case WeaponType.BigSword:
                 AnimateTwoHandSlash();
                 break;
         }
@@ -81,6 +81,7 @@ public class EnemyAnimator : MonoBehaviour
     {
         animator.SetTrigger(PUNCH);
     }
+
 
     private void AnimateOneHandSlash()
     {

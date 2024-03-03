@@ -14,11 +14,6 @@ public class EnemyBattle : MonoBehaviour
     public event EventHandler OnAttackPerformed;
 
     [SerializeField] private WeaponSO weaponSO;
-
-    // private Weapon.WeaponType weaponType = Weapon.WeaponType.BigSword;
-    // [SerializeField] private float damage;
-    // [SerializeField] private float distance;
-    // [SerializeField] private float timeToHit;
     private float currentTimeToHit;
     private bool wasHit;
 
@@ -39,19 +34,19 @@ public class EnemyBattle : MonoBehaviour
             }
         }
 
-        Debug.DrawRay(attackSource.position, attackSource.forward * weaponSO.distance, Color.red);
+        Debug.DrawRay(attackSource.position, attackSource.forward * weaponSO.Distance, Color.red);
     }
 
     public void TryMakeDamage()
     {
         wasHit = true;
         if (Physics.Raycast(attackSource.position, attackSource.forward,
-                out RaycastHit hit, weaponSO.distance))
+                out RaycastHit hit, weaponSO.Distance))
         {
             Debug.Log(hit.transform.name);
             if (hit.transform.TryGetComponent(out Player player))
             {
-                player.TakeDamage(weaponSO.damage);
+                player.TakeDamage(weaponSO.Damage);
             }
         }
     }
@@ -59,33 +54,13 @@ public class EnemyBattle : MonoBehaviour
     public void TryAttack()
     {
         if (IsAttacking()) return;
-        currentTimeToHit = weaponSO.timeToHit;
+        currentTimeToHit = weaponSO.TimeToHit;
         wasHit = false;
         transform.LookAt(Player.Instance.transform);
         OnAttackPerformed?.Invoke(this, EventArgs.Empty);
-        timeToAttack = weaponSO.attackCooldown;
+        timeToAttack = weaponSO.AttackCooldown;
     }
 
-    // public Weapon.WeaponType GetWeaponType()
-    // {
-    //     return weaponType;
-    // }
-
-    // public void RemoveWeapons()
-    // {
-    //     weaponType = Weapon.WeaponType.Fist;
-    //     damage = 1f;
-    //     distance = 1.1f;
-    //     attackCooldown = 1f;
-    // }
-    //
-    // public void EquipWeapon(Weapon newWeapon)
-    // {
-    //     weaponType = newWeapon.GetWeaponType();
-    //     damage = newWeapon.GetWeaponDamage();
-    //     distance = newWeapon.GetWeaponDistance();
-    //     attackCooldown = newWeapon.GetWeaponCooldown();
-    // }
 
     public bool IsAttacking()
     {
@@ -94,7 +69,7 @@ public class EnemyBattle : MonoBehaviour
 
     public float GetAttackDistance()
     {
-        return weaponSO.distance;
+        return weaponSO.Distance;
     }
 
     public WeaponSO GetWeaponSO()

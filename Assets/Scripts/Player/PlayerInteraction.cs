@@ -12,11 +12,6 @@ public class PlayerInteraction : MonoBehaviour
     private Weapon possibleWeapon;
 
     [SerializeField] private GameInput gameInput;
-    // [SerializeField] private Transform bagWeaponL;
-    // [SerializeField] private Transform bagWeaponR;
-    //
-    // // ReSharper disable once InconsistentNaming
-    // [SerializeField] private Transform bagWeaponLR;
 
     void Start()
     {
@@ -28,9 +23,8 @@ public class PlayerInteraction : MonoBehaviour
     private void GameInputOnInteractButtonPressed(object sender, EventArgs e)
     {
         if (possibleWeapon == null) return;
-        EquipWeapon(possibleWeapon);
-        playerBattle.EquipWeapon(possibleWeapon.GetWeaponSO());
-        playerWeaponVisual.ShowWeapon(possibleWeapon.GetWeaponSO());
+        PickUpWeapon(possibleWeapon);
+        PlayerWeaponManager.Instance.EquipWeapon(possibleWeapon.GetWeaponSO());
     }
 
     // Update is called once per frame
@@ -55,34 +49,26 @@ public class PlayerInteraction : MonoBehaviour
         possibleWeapon = other.gameObject.TryGetComponent(out Weapon newWeapon) ? newWeapon : null;
     }
 
-    private void EquipWeapon(Weapon weapon)
+    private void PickUpWeapon(Weapon weapon)
     {
         var weaponSO = weapon.GetWeaponSO();
-        switch (weaponSO.weaponType)
+        switch (weaponSO.WeaponArmType)
         {
-            case WeaponSO.WeaponType.Shield:
+            case WeaponArmType.LeftHanded:
                 DropWeapon(playerBattle.GetWeaponL(), weapon.transform);
-                if (playerBattle.GetWeaponR().weaponType == WeaponSO.WeaponType.BigSword)
+                if (playerBattle.GetWeaponR().WeaponType == WeaponType.BigSword)
                 {
                     DropWeapon(playerBattle.GetWeaponR(), weapon.transform);
                 }
 
                 // weapon.transform.SetParent(bagWeaponL);
                 break;
-            case WeaponSO.WeaponType.Sword:
+            case WeaponArmType.RightHanded:
                 DropWeapon(playerBattle.GetWeaponR(), weapon.transform);
-                // DropWeapon(bagWeaponLR, weapon.transform);
-                // weapon.transform.SetParent(bagWeaponR);
                 break;
-            case WeaponSO.WeaponType.BigSword:
+            case WeaponArmType.BothHanded:
                 DropWeapon(playerBattle.GetWeaponL(), weapon.transform);
                 DropWeapon(playerBattle.GetWeaponR(), weapon.transform);
-                // DropWeapon(bagWeaponL, weapon.transform);
-                // DropWeapon(bagWeaponR, weapon.transform);
-                // DropWeapon(bagWeaponLR, weapon.transform);
-                // weapon.transform.SetParent(bagWeaponLR);
-                break;
-            case WeaponSO.WeaponType.Fist:
                 break;
         }
 
@@ -91,16 +77,11 @@ public class PlayerInteraction : MonoBehaviour
 
     private void DropWeapon(WeaponSO equippedWeaponSO, Transform weaponTransform)
     {
-        if (equippedWeaponSO.weaponType == WeaponSO.WeaponType.Fist)
+        if (equippedWeaponSO.WeaponType == WeaponType.Fist)
         {
             return;
         }
 
-        Instantiate(equippedWeaponSO.prefab, weaponTransform.position, weaponTransform.rotation);
-        // if (equippedWeaponPrefab.childCount != 0)
-        // {
-        //     equippedWeaponPrefab.GetChild(0).transform.position = weaponTransform.position;
-        //     equippedWeaponPrefab.GetChild(0).SetParent(null);
-        // }
+        Instantiate(equippedWeaponSO.WeaponPrefab, weaponTransform.position, weaponTransform.rotation);
     }
 }

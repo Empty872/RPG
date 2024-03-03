@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17748e9cd3cacb54aa433a5836e1a99f, type: 3}
   m_Name: Fist
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  weaponPrefab: {fileID: 0}
+  weaponVisualPrefab: {fileID: 0}
   weaponType: 0
   damage: 1
   distance: 1.1
   attackCooldown: 1
   timeToHit: 0.5
+  name: Fist

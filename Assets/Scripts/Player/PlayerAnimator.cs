@@ -51,9 +51,9 @@ public class PlayerAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator.SetBool(IS_BLOCKING, playerBattle.IsBlocking());
-        animator.SetBool(IS_RUNNING, player.IsRunning());
-        animator.SetBool(IS_SPRINTING, player.IsSprinting());
+        if (playerBattle is not null && playerBattle.enabled) animator.SetBool(IS_BLOCKING, playerBattle.IsBlocking());
+        if (player is not null && player.enabled) animator.SetBool(IS_RUNNING, player.IsRunning());
+        if (player is not null && player.enabled) animator.SetBool(IS_SPRINTING, player.IsSprinting());
     }
 
     private void AnimateJump()
@@ -63,15 +63,15 @@ public class PlayerAnimator : MonoBehaviour
 
     private void AnimateAttack()
     {
-        switch (playerBattle.GetWeaponR().weaponType)
+        switch (playerBattle.GetWeaponR().WeaponType)
         {
-            case WeaponSO.WeaponType.Fist:
+            case WeaponType.Fist:
                 AnimatePunch();
                 break;
-            case WeaponSO.WeaponType.Sword:
+            case WeaponType.Sword:
                 AnimateOneHandSlash();
                 break;
-            case WeaponSO.WeaponType.BigSword:
+            case WeaponType.BigSword:
                 AnimateTwoHandSlash();
                 break;
         }

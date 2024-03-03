@@ -12,9 +12,6 @@ public class PlayerBattle : MonoBehaviour
     [SerializeField] private Transform attackSource;
 
     public event EventHandler OnAttackPerformed;
-
-    // private Weapon.WeaponType weaponTypeR = Weapon.WeaponType.Fist;
-    // private Weapon.WeaponType weaponTypeL = Weapon.WeaponType.Fist;
     [SerializeField] private Collider shieldCollider;
     private float currentTimeToHit;
     private bool wasHit;
@@ -26,6 +23,18 @@ public class PlayerBattle : MonoBehaviour
     {
         weaponL = fist;
         weaponR = fist;
+        PlayerWeaponManager.Instance.OnEquipWeapon += InstanceOnEquipWeapon;
+        PlayerWeaponManager.Instance.OnUnEquipWeapon += InstanceOnUnEquipWeapon;
+    }
+
+    private void InstanceOnEquipWeapon(object sender, PlayerWeaponManager.OnEquipWeaponEventArgs e)
+    {
+        EquipWeapon(e.weaponSO);
+    }
+
+    private void InstanceOnUnEquipWeapon(object sender, PlayerWeaponManager.OnUnEquipWeaponEventArgs e)
+    {
+        UnEquipWeapon(e.weaponArmType);
     }
 
     // Update is called once per frame
@@ -42,26 +51,26 @@ public class PlayerBattle : MonoBehaviour
             }
         }
 
-        Debug.DrawRay(attackSource.position, attackSource.forward * weaponR.distance, Color.red);
+        Debug.DrawRay(attackSource.position, attackSource.forward * weaponR.Distance, Color.red);
     }
 
     public void TryMakeDamage()
     {
         wasHit = true;
         if (Physics.Raycast(attackSource.position, attackSource.forward,
-                out RaycastHit hit, weaponR.distance))
+                out RaycastHit hit, weaponR.Distance))
         {
             Debug.Log(hit.transform.name);
             if (hit.transform.TryGetComponent(out Enemy enemy))
             {
-                enemy.TakeDamage(weaponR.damage);
+                enemy.TakeDamage(weaponR.Damage);
             }
         }
     }
 
     public void TryAttack()
     {
-        currentTimeToHit = weaponR.timeToHit;
+        currentTimeToHit = weaponR.TimeToHit;
         wasHit = false;
         if (IsAttacking()) return;
         shieldCollider.enabled = false;
@@ -86,14 +95,9 @@ public class PlayerBattle : MonoBehaviour
 
 
         OnAttackPerformed?.Invoke(this, EventArgs.Empty);
-        timeToAttack = weaponR.attackCooldown;
+        timeToAttack = weaponR.AttackCooldown;
         // TryMakeDamage();
     }
-
-    // public WeaponSO.WeaponType GetWeaponType()
-    // {
-    //     return weaponR.weaponType;
-    // }
 
     public WeaponSO GetWeaponL()
     {
@@ -105,32 +109,40 @@ public class PlayerBattle : MonoBehaviour
         return weaponR;
     }
 
-    public void RemoveWeapons()
-    {
-        weaponR = null;
-        // weaponTypeR = Weapon.WeaponType.Fist;
-        // timeToHit = 0.5f;
-        // damage = 1f;
-        // distance = 1.1f;
-        // attackCooldown = 1f;
-    }
 
     public void EquipWeapon(WeaponSO newWeapon)
     {
-        switch (newWeapon.weaponType)
+        if (weaponR.WeaponArmType == WeaponArmType.BothHanded)
         {
-            case WeaponSO.WeaponType.Shield:
-                weaponL = newWeapon;
-                if (weaponR.weaponType == WeaponSO.WeaponType.BigSword) weaponR = fist;
-                break;
-            case WeaponSO.WeaponType.BigSword:
-                weaponL = fist;
-                break;
+            weaponL = fist;
+            weaponR = fist;
         }
 
-        if (newWeapon.weaponType != WeaponSO.WeaponType.Shield)
+        switch (newWeapon.WeaponArmType)
         {
-            weaponR = newWeapon;
+            case WeaponArmType.BothHanded:
+                weaponR = newWeapon;
+                weaponL = fist;
+                break;
+            case WeaponArmType.LeftHanded:
+                weaponL = newWeapon;
+                break;
+            case WeaponArmType.RightHanded:
+                weaponR = newWeapon;
+                break;
+        }
+    }
+
+    public void UnEquipWeapon(WeaponArmType weaponArmType)
+    {
+        switch (weaponArmType)
+        {
+            case WeaponArmType.LeftHanded:
+                weaponL = fist;
+                break;
+            default:
+                weaponR = fist;
+                break;
         }
     }
 
@@ -141,7 +153,7 @@ public class PlayerBattle : MonoBehaviour
 
     public bool IsBlocking()
     {
-        return GameInput.Instance.IsBlockButtonPressed() && weaponL.weaponType == WeaponSO.WeaponType.Shield &&
+        return GameInput.Instance.IsBlockButtonPressed() && weaponL.WeaponType == WeaponType.Shield &&
                !IsAttacking() && !Player.Instance.IsSprinting();
     }
 

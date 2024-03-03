@@ -64,6 +64,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameInput.Instance is null) return;
         if (!CanMove()) return;
         Move();
         canJump = Physics.Raycast(transform.position, Vector3.down, 0.05f);
