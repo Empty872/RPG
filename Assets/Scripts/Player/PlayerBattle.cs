@@ -21,8 +21,11 @@ public class PlayerBattle : MonoBehaviour
 
     private void Start()
     {
+        //test code
         weaponL = fist;
         weaponR = fist;
+        // weaponL = StaticWeaponManager.weaponSOLeft is null ? fist : StaticWeaponManager.weaponSOLeft;
+        // weaponR = StaticWeaponManager.weaponSORight is null ? fist : StaticWeaponManager.weaponSORight;
         PlayerWeaponManager.Instance.OnEquipWeapon += InstanceOnEquipWeapon;
         PlayerWeaponManager.Instance.OnUnEquipWeapon += InstanceOnUnEquipWeapon;
     }

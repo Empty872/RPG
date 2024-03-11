@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8079813142655939125}
   - component: {fileID: 5333480953816489179}
   - component: {fileID: 857923138273922368}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: BigSwordVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

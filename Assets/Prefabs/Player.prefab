@@ -293,7 +293,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8538980844472178656
 Transform:
   m_ObjectHideFlags: 0
@@ -424,7 +424,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6668032855493894005
 Transform:
   m_ObjectHideFlags: 0
@@ -2377,7 +2377,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5789806040097068566
 Transform:
   m_ObjectHideFlags: 0
@@ -2987,8 +2987,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSource: {fileID: 7966338918741878960}
-  damage: 1
-  distance: 1
+  shieldCollider: {fileID: 0}
+  fist: {fileID: 0}
 --- !u!114 &330194731283427162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3002,7 +3002,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameInput: {fileID: 0}
-  bag: {fileID: 0}
 --- !u!114 &8161548226690533110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3017,6 +3016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sword: {fileID: 6171882327468393151}
   bigSword: {fileID: 6846977404095852463}
+  shield: {fileID: 0}
 --- !u!114 &8723531581206427079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3030,6 +3030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 7
+  sprintSpeed: 10
   cameraRotation: {x: 0, y: 0, z: 0.38268346, w: 0.9238795}
   healthPointsMax: 20
 --- !u!114 &1206080536483435340
@@ -5512,7 +5513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2458000541843377360
 Transform:
   m_ObjectHideFlags: 0

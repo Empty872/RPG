@@ -127,10 +127,7 @@ public class Enemy : MonoBehaviour
         TryChangeState(State.Dead);
         enabled = false;
         GetComponent<Collider>().enabled = false;
-        // gameObject.layer = 0;
-        // gameObject.layer = LayerMask.NameToLayer("Dead");
-        // rb.isKinematic = true;
-        
+        Wallet.EarnMoneyForEnemyDeath();
     }
 
     private void DetectPlayer()
