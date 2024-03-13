@@ -13,6 +13,7 @@ public class WalletView : MonoBehaviour
     {
         textMeshProUGUI = GetComponent<TextMeshProUGUI>();
         Wallet.OnMoneyChanged += WalletOnMoneyChanged;
+        ChangeMoneyCountView();
     }
 
     private void WalletOnMoneyChanged(object sender, EventArgs e)

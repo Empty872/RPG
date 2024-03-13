@@ -1,9 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour
 {
@@ -128,6 +124,7 @@ public class Enemy : MonoBehaviour
         enabled = false;
         GetComponent<Collider>().enabled = false;
         Wallet.EarnMoneyForEnemyDeath();
+        LevelManager.Instance.DecreaseEnemiesCount();
     }
 
     private void DetectPlayer()

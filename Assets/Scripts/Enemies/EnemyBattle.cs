@@ -43,7 +43,7 @@ public class EnemyBattle : MonoBehaviour
         if (Physics.Raycast(attackSource.position, attackSource.forward,
                 out RaycastHit hit, weaponSO.Distance))
         {
-            Debug.Log(hit.transform.name);
+            // Debug.Log(hit.transform.name);
             if (hit.transform.TryGetComponent(out Player player))
             {
                 player.TakeDamage(weaponSO.Damage);

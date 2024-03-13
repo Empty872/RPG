@@ -20,3 +20,4 @@ MonoBehaviour:
   attackCooldown: 0
   timeToHit: 0
   name: Shield
+  cost: 10

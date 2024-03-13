@@ -15,6 +15,7 @@ public class WeaponSO : ScriptableObject
     [SerializeField] private float attackCooldown;
     [SerializeField] private float timeToHit;
     [SerializeField] private string name;
+    [SerializeField] private int cost;
 
     public Transform WeaponPrefab => weaponPrefab;
     public Transform WeaponUIPrefab => weaponUIPrefab;
@@ -25,6 +26,7 @@ public class WeaponSO : ScriptableObject
 
     public WeaponType WeaponType => weaponType;
     public string Name => name;
+    public int Cost => cost;
 
     // public WeaponArmType WeaponArmType => GetArmType();
     public WeaponArmType WeaponArmType

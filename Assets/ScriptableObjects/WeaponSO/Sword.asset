@@ -20,3 +20,4 @@ MonoBehaviour:
   attackCooldown: 1
   timeToHit: 0.3
   name: Sword
+  cost: 10

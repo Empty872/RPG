@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
         healthPoints -= damage;
         OnHealthChanged?.Invoke(this,
             new OnHealthChangedEventArgs { normalizedHeath = healthPoints / healthPointsMax });
-        Debug.Log(healthPoints);
+        // Debug.Log(healthPoints);
         if (healthPoints <= 0) Die();
     }
 
